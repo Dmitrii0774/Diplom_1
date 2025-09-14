@@ -7,41 +7,29 @@ from praktikum.ingredient_types import INGREDIENT_TYPE_FILLING
 class TestForBurger:
     """Класс для тестирования функциональности бургера."""
 
-    def test_set_buns(
-        self,
-        burger: "Burger",
-        bun: "Bun"
-    ) -> None:
+    def test_set_buns(self, bun: "Bun") -> None:
         """Тест установки булочки."""
+        burger = Burger()  # Создаём объект прямо в тесте
         burger.set_buns(bun)
         assert burger.bun == bun, "Булочка установлена некорректно"
 
-    def test_add_ingredient(
-        self,
-        burger: "Burger",
-        ingredient: "Ingredient"
-    ) -> None:
+    def test_add_ingredient(self, ingredient: "Ingredient") -> None:
         """Тест добавления ингредиента."""
+        burger = Burger()  # Создаём объект прямо в тесте
         burger.add_ingredient(ingredient)
         assert burger.ingredients[0] == ingredient, "Ингредиент не добавлен"
         assert len(burger.ingredients) == 1, "Неверное количество ингредиентов"
 
-    def test_remove_ingredient(
-        self, 
-        burger: "Burger",
-        ingredient: "Ingredient"
-    ) -> None:
+    def test_remove_ingredient(self, ingredient: "Ingredient") -> None:
         """Тест удаления ингредиента."""
+        burger = Burger()  # Создаём объект прямо в тесте
         burger.add_ingredient(ingredient)
         burger.remove_ingredient(0)
         assert len(burger.ingredients) == 0, "Ингредиент не удален"
 
-    def test_move_ingredient(
-        self, 
-        burger: "Burger",
-        ingredient: "Ingredient"
-    ) -> None:
+    def test_move_ingredient(self, ingredient: "Ingredient") -> None:
         """Тест перемещения ингредиента."""
+        burger = Burger()  # Создаём объект прямо в тесте
         burger.add_ingredient(ingredient)
         ingredient_another = Ingredient(
             INGREDIENT_TYPE_FILLING,
@@ -56,13 +44,9 @@ class TestForBurger:
         )
         assert burger.ingredients[1] == ingredient, "Неверное перемещение"
 
-    def test_get_price(
-        self,
-        burger: "Burger",
-        bun: "Bun",
-        ingredient: "Ingredient"
-    ) -> None:
+    def test_get_price(self, bun: "Bun", ingredient: "Ingredient") -> None:
         """Тест расчета стоимости бургера."""
+        burger = Burger()  # Создаём объект прямо в тесте
         burger.set_buns(bun)
         burger.add_ingredient(ingredient)
         expected_price = bun.get_price() * 2 + ingredient.get_price()
@@ -73,10 +57,7 @@ class TestForBurger:
 
     # Проверка формирования чека
     def test_get_receipt(
-        self,
-        burger: "Burger",
-        bun: "Bun",
-        ingredient: "Ingredient"
+        self, bun: "Bun", ingredient: "Ingredient"
     ) -> None:
         """
         Тест проверки формирования чека для бургера.
@@ -86,6 +67,8 @@ class TestForBurger:
         * Правильность отображения ингредиентов
         * Верность формирования итоговой цены
         """
+        burger = Burger()  # Создаём объект прямо в тесте
+
         # Настройка бургера
         burger.set_buns(bun)
         burger.add_ingredient(ingredient)
